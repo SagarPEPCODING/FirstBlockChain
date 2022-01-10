@@ -1,6 +1,6 @@
 const Block = require("./block");
 const block = require("./block");
-const cryptoHash = require("./crypto-hash");
+const cryptoHash = require("../util/crypto-hash");
 class blockchain {
   constructor() {
     this.chain = [block.genesis()];
@@ -12,8 +12,24 @@ class blockchain {
     return objBlock;
   }
 
+  replaceChain(chain) {
+    console.log(chain.length, this.chain.length);
+    if (chain.length <= this.chain.length) {
+      console.error("this incoming chain must be longer");
+      return;
+    }
+    if (!blockchain.isValidChain(chain)) {
+      console.error("this incoming chain must be valid");
+      return;
+    }
+    console.log("replaced chain with", chain);
+    this.chain = chain;
+    console.log(chain.length, this.chain.length);
+  }
+
   static isValidChain(chain) {
     if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) {
+      console.log('checking genesis'); 
       return false;
     }
 
@@ -23,6 +39,7 @@ class blockchain {
       const lastDifficulty = chain[i - 1].difficulty;
 
       if (lastHash !== actualLastHash) {
+        console.log('checking lastHash', lastHash, actualLastHash);
         return false;
       }
       const validatedHash = cryptoHash(
@@ -33,10 +50,12 @@ class blockchain {
         difficulty
       );
 
-      if (Math.abs(lastDifficulty - difficulty) > 1) {
+      if (Math.abs(lastDifficulty - difficulty) > 1) { 
+        console.log('checking difficulty', Math.abs(lastDifficulty - difficulty));
         return false;
       }
       if (hash !== validatedHash) {
+        console.log('checking valid hash');
         return false;
       }
     }

@@ -1,8 +1,8 @@
-const cryptoHash = require("./crypto-hash");
+const cryptoHash = require("./util/crypto-hash");
 const INITIAL_DIFFICULTY = 3;
 const MINE_RATE = 1000;
 
-const timestamp = Date.now();
+const timestamp = 1;
 const lastHash = "____";
 const data = [];
 const GENESIS_DATA = {

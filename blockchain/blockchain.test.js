@@ -1,7 +1,7 @@
 const blockChain = require("./blockchain");
 const block = require("./block");
-const { GENESIS_DATA } = require("./config");
-const cryptoHash = require("./crypto-hash");
+const { GENESIS_DATA } = require("../config");
+const cryptoHash = require("../util/crypto-hash");
 const { adjustDifficulty } = require("./block");
 const Block = require("./block");
 
