@@ -39,7 +39,7 @@ class blockchain {
       const lastDifficulty = chain[i - 1].difficulty;
 
       if (lastHash !== actualLastHash) {
-        console.log('checking lastHash', lastHash, actualLastHash);
+        // console.log('checking lastHash', lastHash, actualLastHash);
         return false;
       }
       const validatedHash = cryptoHash(
@@ -51,11 +51,11 @@ class blockchain {
       );
 
       if (Math.abs(lastDifficulty - difficulty) > 1) { 
-        console.log('checking difficulty', Math.abs(lastDifficulty - difficulty));
+        // console.log('checking difficulty', Math.abs(lastDifficulty - difficulty));
         return false;
       }
       if (hash !== validatedHash) {
-        console.log('checking valid hash');
+        // console.log('checking valid hash');
         return false;
       }
     }
